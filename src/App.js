@@ -1,15 +1,11 @@
 import React from "react";
 import "./App.css";
-import ImageGrid from "./components/ImageGrid";
+import ImageGrid from "./components/card/ImageGrid";
 
 function App() {
   return (
     <div className="App">
       <ImageGrid />
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
     </div>
   );
 }
