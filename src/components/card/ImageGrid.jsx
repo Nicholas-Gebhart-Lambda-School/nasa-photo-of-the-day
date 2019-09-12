@@ -1,32 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ImageCard from "./ImageCard";
+import { Container, Row } from "reactstrap";
 
 function ImageGrid() {
+  const token = "1fEgVleJ77KI0sefAJYab9JMhn8Zw1dVKu2pKTdk";
   const [imageState, setImageState] = useState([]);
 
   useEffect(() => {
     axios
-      .get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+      .get(`https://api.nasa.gov/planetary/apod?api_key=${token}&count=9`)
       .then(res => {
         const image = res.data;
         setImageState(image);
       })
       .catch(err => {
-        console.log("Houston, we have a problem", err);
+        console.error("Houston, we have a problem", err);
       });
   }, []);
 
   return (
-    //
-
-    <div>
-      <ImageCard
-        title={imageState.title}
-        url={imageState.url}
-        explanation={imageState.explanation}
-      />
-    </div>
+    <Container>
+      <Row>
+        {imageState.map((image, index) => {
+          return (
+            <ImageCard
+              key={index}
+              title={image.title}
+              url={image.url}
+              date={image.date}
+              explanation={image.explanation}
+            />
+          );
+        })}
+      </Row>
+    </Container>
   );
 }
 
